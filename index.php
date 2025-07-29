@@ -60,6 +60,10 @@
                 </div>
             </div>
         </nav>
+
+        <div class="text-center my-3">
+            <button @click="uploadResume">Upload Resume</button>
+        </div>
         <form @submit.prevent="saveForm">
             <div class="container-fluid m-2">
 
@@ -112,6 +116,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                     
 
                                         <div class="row mb-1">
                                             <div class="col-md-6">
@@ -127,7 +132,7 @@
                                         <div class="row mb-1">
                                             <div class="col-md-6">
                                                 <label class="form-label">New IC</label>
-                                                <input type="text" class="form-control" v-model="formData.newIC">
+                                                <input type="text" class="form-control" v-model="formPersonal.newic">
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="form-label">Passport no</label>
@@ -478,9 +483,11 @@
                     },
                     formPersonal: {
                         name: '',
+                        newic: '',
                     },
                 };
             },
+
             watch: {
                 sameAsPermanent(newVal) {
                     if (newVal) {
@@ -490,6 +497,7 @@
                     }
                 }
             },
+
             methods: {
                 saveForm() {
                     alert('Form saved successfully!');
@@ -502,13 +510,20 @@
                     if (currentIndex < this.navigation.length - 1) {
                         this.activeNav = this.navigation[currentIndex + 1].id;
                     }
+                },
+                uploadResume() {
+                    // FUNCTION TO LOAD RESUME
+                    this.formPersonal.name = RESULT.name
+                    this.formPersonal.newic = RESULT.phone
+                    
                 }
             },
-            created() {
+
+            created() { // before html, pull backend
 
             },
-            mounted() {
-                this.formPersonal.name = RESULT.name
+            mounted() { // after html, datepicker
+
             }
         }).mount('#app');
     </script>
